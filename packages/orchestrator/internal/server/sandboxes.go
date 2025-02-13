@@ -73,21 +73,23 @@ func (s *server) Create(ctx context.Context, req *orchestrator.SandboxCreateRequ
 
 	s.sandboxes.Insert(req.Sandbox.SandboxId, sbx)
 
-	go func() {
-		waitErr := sbx.Wait()
-		if waitErr != nil {
-			fmt.Fprintf(os.Stderr, "failed to wait for Sandbox: %v\n", waitErr)
-		}
+	/*
+		go func() {
+			waitErr := sbx.Wait()
+			if waitErr != nil {
+				fmt.Fprintf(os.Stderr, "failed to wait for Sandbox: %v\n", waitErr)
+			}
 
-		cleanupErr := cleanup.Run()
-		if cleanupErr != nil {
-			fmt.Fprintf(os.Stderr, "failed to cleanup Sandbox: %v\n", cleanupErr)
-		}
+			cleanupErr := cleanup.Run()
+			if cleanupErr != nil {
+				fmt.Fprintf(os.Stderr, "failed to cleanup Sandbox: %v\n", cleanupErr)
+			}
 
-		s.sandboxes.Remove(req.Sandbox.SandboxId)
+			s.sandboxes.Remove(req.Sandbox.SandboxId)
 
-		logger.Infof("Sandbox killed")
-	}()
+			logger.Infof("Sandbox killed")
+		}()
+	*/
 
 	return &orchestrator.SandboxCreateResponse{
 		ClientId: consul.ClientID,
