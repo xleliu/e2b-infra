@@ -24,7 +24,7 @@ import (
 const (
 	InstanceExpiration = time.Second * 15
 	// Should we auto pause the instance by default instead of killing it,
-	InstanceAutoPauseDefault = false
+	InstanceAutoPauseDefault = true
 	CacheSyncTime            = time.Minute
 )
 
